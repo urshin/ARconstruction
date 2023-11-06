@@ -72,9 +72,6 @@ public class ShowObjs : MonoBehaviour
         {
             bool viewAllEnabled = toggle.isOn;
 
-            m_withoutWall.SetActive(viewAllEnabled);
-            m_WallObj.SetActive(viewAllEnabled);
-
             if (viewAllEnabled)
             {
                 // 모든 다른 토글들을 비활성화
@@ -85,6 +82,10 @@ public class ShowObjs : MonoBehaviour
                 m_Toggle_Plumbing.isOn = false;
                 m_Toggle_FireProtection.isOn = false;
             }
+
+            m_withoutWall.SetActive(viewAllEnabled);
+            m_WallObj.SetActive(viewAllEnabled);
+
         }
         else if (toggle == m_Toggle_Frame)
         {
