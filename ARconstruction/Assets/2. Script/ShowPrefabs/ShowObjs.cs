@@ -40,7 +40,7 @@ public class ShowObjs : MonoBehaviour
         {
             toggle.onValueChanged.AddListener(delegate
             {
-                ToggleValueChanged(toggle);
+                ToggleValueChanged(toggle); // 토글 값 변경 이벤트 핸들러를 등록
             });
         }
 
@@ -57,8 +57,8 @@ public class ShowObjs : MonoBehaviour
 
     void ToggleInit()
     {
-        //토글 초기 설정
-        m_Toggle_ViewAll.isOn = true;
+        // 토글 초기 설정
+        m_Toggle_ViewAll.isOn = true; // 처음에 모두 보이게 설정
         m_Toggle_Frame.isOn = false;
         m_Toggle_Wall.isOn = false;
         m_Toggle_Mechanical.isOn = false;
@@ -77,6 +77,7 @@ public class ShowObjs : MonoBehaviour
 
             if (viewAllEnabled)
             {
+                // 모든 다른 토글들을 비활성화
                 m_Toggle_Frame.isOn = false;
                 m_Toggle_Wall.isOn = false;
                 m_Toggle_MEPF.isOn = false;
@@ -89,20 +90,23 @@ public class ShowObjs : MonoBehaviour
         {
             if (toggle.isOn)
             {
+                // 다른 토글 비활성화
                 m_Toggle_ViewAll.isOn = false;
             }
-            m_FrameObj.SetActive(toggle.isOn);
+            m_FrameObj.SetActive(toggle.isOn); // 프레임 오브젝트 활성화/비활성화
         }
         else if (toggle == m_Toggle_Wall)
         {
             if (toggle.isOn)
             {
+                // 다른 토글 비활성화
                 m_Toggle_ViewAll.isOn = false;
             }
-            m_WallObj.SetActive(toggle.isOn);
+            m_WallObj.SetActive(toggle.isOn); // 벽 오브젝트 활성화/비활성화
         }
         else if (toggle == m_Toggle_MEPF && !toggle.isOn)
         {
+            // MEPF 토글이 해제되면 다른 하위 토글들도 해제
             m_Toggle_Mechanical.isOn = false;
             m_Toggle_Plumbing.isOn = false;
             m_Toggle_FireProtection.isOn = false;
@@ -111,25 +115,28 @@ public class ShowObjs : MonoBehaviour
         {
             if (toggle.isOn)
             {
+                // 다른 토글 비활성화
                 m_Toggle_ViewAll.isOn = false;
             }
-            m_MechanicalObj.SetActive(toggle.isOn);
+            m_MechanicalObj.SetActive(toggle.isOn); // 기계 오브젝트 활성화/비활성화
         }
         else if (toggle == m_Toggle_Plumbing)
         {
             if (toggle.isOn)
             {
+                // 다른 토글 비활성화
                 m_Toggle_ViewAll.isOn = false;
             }
-            m_PlumbingObj.SetActive(toggle.isOn);
+            m_PlumbingObj.SetActive(toggle.isOn); // 배관 오브젝트 활성화/비활성화
         }
         else if (toggle == m_Toggle_FireProtection)
         {
             if (toggle.isOn)
             {
+                // 다른 토글 비활성화
                 m_Toggle_ViewAll.isOn = false;
             }
-            m_FireProtectionObj.SetActive(toggle.isOn);
+            m_FireProtectionObj.SetActive(toggle.isOn); // 소방 오브젝트 활성화/비활성화
         }
     }
 
