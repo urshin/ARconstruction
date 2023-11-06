@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ShowObjs : MonoBehaviour
@@ -11,6 +12,11 @@ public class ShowObjs : MonoBehaviour
     [SerializeField] Toggle m_Toggle_Mechanical;
     [SerializeField] Toggle m_Toggle_Plumbing;
     [SerializeField] Toggle m_Toggle_FireProtection;
+    #endregion
+
+    #region Button
+    [SerializeField] Button m_resetBtn;
+    [SerializeField] Button m_deleteBtn;
     #endregion
 
     #region GameObject
@@ -37,6 +43,16 @@ public class ShowObjs : MonoBehaviour
                 ToggleValueChanged(toggle);
             });
         }
+
+        m_resetBtn.onClick.AddListener(delegate
+        {
+            ToggleInit();
+        });
+
+        m_deleteBtn.onClick.AddListener(delegate
+        {
+            LostnDelete();
+        });
     }
 
     void ToggleInit()
@@ -115,5 +131,15 @@ public class ShowObjs : MonoBehaviour
             }
             m_FireProtectionObj.SetActive(toggle.isOn);
         }
+    }
+
+    void LostnDelete()
+    {
+        m_withoutWall.SetActive(false);
+        m_FrameObj.SetActive(false);
+        m_WallObj.SetActive(false);
+        m_MechanicalObj.SetActive(false);
+        m_PlumbingObj.SetActive(false);
+        m_FireProtectionObj.SetActive(false);
     }
 }

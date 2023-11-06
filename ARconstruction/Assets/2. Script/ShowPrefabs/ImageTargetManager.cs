@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Vuforia;
 
-public class ImageTargetManager : MonoBehaviour/*, ITrackableEventHandler*/
+public class ImageTargetManager : MonoBehaviour
 {
     [SerializeField] GameObject m_House;
     [SerializeField] GameObject m_HouseFrame;
@@ -12,82 +11,45 @@ public class ImageTargetManager : MonoBehaviour/*, ITrackableEventHandler*/
     [SerializeField] GameObject m_PlumbingObj;
     [SerializeField] GameObject m_FireProtectionObj;
 
+    [SerializeField] Toggle m_Toggle_ViewAll;
+    [SerializeField] Toggle m_Toggle_Frame;
+    [SerializeField] Toggle m_Toggle_Wall;
+    [SerializeField] Toggle m_Toggle_MEPF;
+    [SerializeField] Toggle m_Toggle_Mechanical;
+    [SerializeField] Toggle m_Toggle_Plumbing;
+    [SerializeField] Toggle m_Toggle_FireProtection;
+
     [SerializeField] Button m_resetBtn;
     [SerializeField] Button m_deleteBtn;
 
-    //private TrackableBehaviour m_TrackableBehaviour;
 
     private void Start()
     {
-        //m_TrackableBehaviour = GetComponent<TrackableBehaviour>();
-        //if (m_TrackableBehaviour)
-        //{
-        //    m_TrackableBehaviour.RegisterTrackableEventHandler(this);
-        //}
-
-        //m_resetBtn.onClick.AddListener(ResetObjs);
-        //m_deleteBtn.onClick.AddListener(Delete);
-
-        //eventHandler = GetComponent<DefaultObserverEventHandler>();
-
-        //eventHandler.OnTargetFound.AddListener(delegate
-        //{
-        //    Found();
-        //});
-
-        //eventHandler.OnTargetLost.AddListener(delegate
-        //{
-        //    Lost();
-        //});
-
         m_resetBtn.onClick.AddListener(delegate
         {
-            ResetObjs();
+            FoundnReset();
         });
 
         m_deleteBtn.onClick.AddListener(delegate
         {
-            Delete();
+            LostnDelete();
         });
     }
-    //public void OnTrackableStateChanged(
-    // TrackableBehaviour.Status previousStatus,
-    // TrackableBehaviour.Status newStatus)
-    //{
-    //    if (newStatus == TrackableBehaviour.Status.TRACKED)
-    //    {
-    //        Found();
-    //    }
-    //    else
-    //    {
-    //        Lost();
-    //    }
-    //}
-    public void Found()
+    public void FoundnReset()
     {
-        m_House.SetActive(true);
-        m_HouseFrame.SetActive(false);
-        m_MechanicalObj.SetActive(false);
-        m_PlumbingObj.SetActive(false);
-        m_FireProtectionObj.SetActive(false);
+        //m_House.SetActive(true);
+        //m_HouseFrame.SetActive(false);
+        //m_MechanicalObj.SetActive(false);
+        //m_PlumbingObj.SetActive(false);
+        //m_FireProtectionObj.SetActive(false);
     }
 
-    public void Lost()
+    public void LostnDelete()
     {
         m_House.SetActive(false);
         m_HouseFrame.SetActive(false);
         m_MechanicalObj.SetActive(false);
         m_PlumbingObj.SetActive(false);
         m_FireProtectionObj.SetActive(false);
-    }
-
-    public void ResetObjs()
-    {
-        Found();
-    }
-
-    public void Delete()
-    {
-        Lost();
     }
 }
