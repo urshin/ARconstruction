@@ -6,40 +6,31 @@ using UnityEngine.UI;
 
 public class BtnUI : MonoBehaviour
 {
-    #region Toggle
-    Toggle m_Toggle_ViewAll;
-    Toggle m_Toggle_Frame;
-    Toggle m_Toggle_Wall;
-    Toggle m_Toggle_MEPF;
-    Toggle m_Toggle_Mechanical;
-    Toggle m_Toggle_Plumbing;
-    Toggle m_Toggle_FireProtection;
-    #endregion
+    Toggle[] toggles;
+    enum ButtonIndex { Reset, Delete, Phase}
+    Button[] buttons;
 
-    #region Button
-    [SerializeField] Button m_resetBtn;
-    [SerializeField] Button m_deleteBtn;
-    [SerializeField] Button m_phaseBtn;
-    #endregion
+    [SerializeField] private Slider phaseSlider;
+    [SerializeField] private GameObject dropdownMenu; //MEDF토글 활성화시 나오는 드롭다운메뉴
 
-    [SerializeField] Slider phaseSlider;
-    ShowObjs showObjScript;
-    public GameObject dropdownMenu; // 드롭 다운 메뉴
-    private bool isMenuActive = false; //MEPF 토글 체크박스 bool값
-    bool isPhaseBtnOn = true; //공정버튼 on/off 구분용 bool값
+    private bool isMenuActive = false; // Dropdown 메뉴 active값
+    private bool isPhaseBtnOn = true; // 공정버튼 on/off bool값
+
+    private ShowObjs showObjScript;
 
     private void Start()
     {
-        //전체 UI 초기화
-        UIInit();
+        //UI초기화
+        InitializeUI();
 
-        //showObgScript 참조
+        //ShowObjs.cs 참조
         showObjScript = FindObjectOfType<ShowObjs>();
 
-        m_phaseBtn.onClick.AddListener(delegate
-        {
-            ClickPhaseBtn();
-        });
+        //ResourceManager에서 버튼 배열 참조
+        buttons = ResourceManager.instance.buttons;
+
+        //공정 버튼 클릭 시 이벤트 리스너 할당 TogglePhase 메서드 실행
+        buttons[(int)ButtonIndex.Phase].onClick.AddListener(TogglePhase);
     }
 
     public void ToggleDropDown()
@@ -47,86 +38,58 @@ public class BtnUI : MonoBehaviour
         isMenuActive = !isMenuActive;
         dropdownMenu.SetActive(isMenuActive);
     }
-
-    void UIInit()
+    private void InitializeUI()
     {
-        Toggle[] togglesFromManager = ResourceManager.instance.toggles;
-        m_Toggle_ViewAll = togglesFromManager[0];
-        m_Toggle_Frame = togglesFromManager[1];
-        m_Toggle_Wall = togglesFromManager[2];
-        m_Toggle_MEPF = togglesFromManager[3];
-        m_Toggle_Mechanical = togglesFromManager[4];
-        m_Toggle_Plumbing = togglesFromManager[5];
-        m_Toggle_FireProtection = togglesFromManager[6];
+        //ResourceManager에서 Toggles 배열 참조
+        toggles = ResourceManager.instance.toggles;
 
-        //모든 토글 Interactable = true;
-        m_Toggle_ViewAll.interactable = true;
-        m_Toggle_Frame.interactable = true;
-        m_Toggle_Wall.interactable = true;
-        m_Toggle_MEPF.interactable = true;
-        m_Toggle_Mechanical.interactable = true;
-        m_Toggle_Plumbing.interactable = true;
-        m_Toggle_FireProtection.interactable = true;
-
-        dropdownMenu.SetActive(false); //메뉴 비활성화
-
-        //공정slider = false;
+        dropdownMenu.SetActive(false);
         phaseSlider.interactable = false;
+
+        //모든 토글 Interactable = true 상태
+        SetTogglesInteractable(true);
     }
 
-    void ClickPhaseBtn()
+    private void TogglePhase()
     {
-        if (isPhaseBtnOn == true)
+        if (showObjScript != null)
         {
-
-            if (showObjScript != null)
-            {
+            if (isPhaseBtnOn)
+                //모든 Objs.SetActive = false; 상태로
                 showObjScript.LostnDelete();
-            }
-
-            //모든 토글 Interactable = false;
-            m_Toggle_ViewAll.interactable = false;
-            m_Toggle_Frame.interactable = false;
-            m_Toggle_Wall.interactable = false;
-            m_Toggle_MEPF.interactable = false;
-            m_Toggle_Mechanical.interactable = false;
-            m_Toggle_Plumbing.interactable = false;
-            m_Toggle_FireProtection.interactable = false;
-
-            //부분별보기용 버튼(Reset/Delete) 클릭 불가
-            m_resetBtn.interactable = false;
-            m_deleteBtn.interactable = false;
-
-            //공정slider = true;
-            phaseSlider.interactable = true;
-
-            isPhaseBtnOn = false;
-        }
-        else
-        {
-            if (showObjScript != null)
-            {
+            else
+                //ViewAll토글.isOn = true; 상태로
                 showObjScript.ToggleInit();
-            }
+        }
 
-            //모든 토글 Interactable = true;
-            m_Toggle_ViewAll.interactable = true;
-            m_Toggle_Frame.interactable = true;
-            m_Toggle_Wall.interactable = true;
-            m_Toggle_MEPF.interactable = true;
-            m_Toggle_Mechanical.interactable = true;
-            m_Toggle_Plumbing.interactable = true;
-            m_Toggle_FireProtection.interactable = true;
+        //공정버튼 on일 경우 토글/기타 버튼들 Interactable = false;
+        SetTogglenBtnInteractable(!isPhaseBtnOn);
 
-            //부분별보기용 버튼(Reset/Delete) 클릭 가능
-            m_resetBtn.interactable = true;
-            m_deleteBtn.interactable = true;
+        //버튼 눌리면 isPhaseBtnOn bool값 변경
+        isPhaseBtnOn = !isPhaseBtnOn;
+    }
 
-            //공정slider = false;
+    private void SetTogglenBtnInteractable(bool interactable)
+    {
+        //토글 상태 설정
+        SetTogglesInteractable(interactable);
+
+        //버튼 상태 설정
+        buttons[(int)ButtonIndex.Reset].interactable = interactable;
+        buttons[(int)ButtonIndex.Delete].interactable = interactable;
+
+        //공정 슬라이더 상태 설정
+        phaseSlider.interactable = !interactable;
+        //공정버튼off되면 슬라이더 값 0으로 초기화
+        if (!interactable)
             phaseSlider.value = 0;
-            phaseSlider.interactable = false;
+    }
 
-            isPhaseBtnOn = true;
+    private void SetTogglesInteractable(bool interactable)
+    {
+        foreach (Toggle toggle in toggles)
+        {
+            toggle.interactable = interactable;
         }
     }
 }

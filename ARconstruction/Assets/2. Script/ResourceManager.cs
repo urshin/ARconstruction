@@ -15,13 +15,4 @@ public class ResourceManager : MonoBehaviour
     {
         ResourceManager.instance = this;
     }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
