@@ -64,6 +64,13 @@ public class ShowObjs : MonoBehaviour
         m_Toggle_Mechanical.isOn = false;
         m_Toggle_Plumbing.isOn = false;
         m_Toggle_FireProtection.isOn = false;
+
+        m_withoutWall.SetActive(true);
+        m_FrameObj.SetActive(false);
+        m_WallObj.SetActive(true);
+        m_MechanicalObj.SetActive(false);
+        m_PlumbingObj.SetActive(false);
+        m_FireProtectionObj.SetActive(false);
     }
 
     void ToggleValueChanged(Toggle toggle)
@@ -140,7 +147,7 @@ public class ShowObjs : MonoBehaviour
         }
     }
 
-    void LostnDelete()
+    public void LostnDelete()
     {
         m_Toggle_ViewAll.isOn = false;
         m_Toggle_Frame.isOn = false;
