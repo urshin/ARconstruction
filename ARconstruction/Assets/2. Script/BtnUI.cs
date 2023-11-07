@@ -116,6 +116,7 @@ public class BtnUI : MonoBehaviour
             m_deleteBtn.interactable = true;
 
             //°øÁ¤slider = false;
+            phaseSlider.value = 0;
             phaseSlider.interactable = false;
 
             isPhaseBtnOn = true;
