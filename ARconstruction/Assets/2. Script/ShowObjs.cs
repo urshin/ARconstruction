@@ -85,7 +85,6 @@ public class ShowObjs : MonoBehaviour
 
             m_withoutWall.SetActive(viewAllEnabled);
             m_WallObj.SetActive(viewAllEnabled);
-
         }
         else if (toggle == m_Toggle_Frame)
         {
@@ -143,11 +142,12 @@ public class ShowObjs : MonoBehaviour
 
     void LostnDelete()
     {
-        m_withoutWall.SetActive(false);
-        m_FrameObj.SetActive(false);
-        m_WallObj.SetActive(false);
-        m_MechanicalObj.SetActive(false);
-        m_PlumbingObj.SetActive(false);
-        m_FireProtectionObj.SetActive(false);
+        m_Toggle_ViewAll.isOn = false;
+        m_Toggle_Frame.isOn = false;
+        m_Toggle_Wall.isOn = false;
+        m_Toggle_MEPF.isOn = false;
+        m_Toggle_Mechanical.isOn = false;
+        m_Toggle_Plumbing.isOn = false;
+        m_Toggle_FireProtection.isOn = false;
     }
 }
