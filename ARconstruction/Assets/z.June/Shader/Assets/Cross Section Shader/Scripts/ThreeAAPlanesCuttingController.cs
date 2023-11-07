@@ -41,9 +41,9 @@ public class ThreeAAPlanesCuttingController : MonoBehaviour
         {
             if (rend[i].material.shader.name == "CrossSection/ThreeAAPlanesBSP")
             {
-                rend[i].material.SetVector("_Plane1Position", positionYZ);
-                rend[i].material.SetVector("_Plane2Position", positionXZ);
-                rend[i].material.SetVector("_Plane3Position", positionXY);
+                rend[i].material.SetVector("_Plane1Position", positionYZ/3);
+                rend[i].material.SetVector("_Plane2Position", positionXZ/3);
+                rend[i].material.SetVector("_Plane3Position", positionXY/3);
             }
         }
     }
