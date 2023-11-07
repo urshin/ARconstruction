@@ -55,7 +55,7 @@ public class ShowObjs : MonoBehaviour
         });
     }
 
-    void ToggleInit()
+    public void ToggleInit()
     {
         // 토글 초기 설정
         m_Toggle_ViewAll.isOn = true; // 처음에 모두 보이게 설정

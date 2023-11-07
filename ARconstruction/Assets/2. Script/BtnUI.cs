@@ -29,7 +29,8 @@ public class BtnUI : MonoBehaviour
     [SerializeField] Slider phaseSlider;
 
     public GameObject dropdownMenu; // 드롭 다운 메뉴
-    private bool isMenuActive = false;  
+    private bool isMenuActive = false;
+    bool isPhaseBtnOn = true;
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class BtnUI : MonoBehaviour
 
         m_phaseBtn.onClick.AddListener(delegate
         {
-            OnPhaseBtn();
+            ClickPhaseBtn();
         });
     }
 
@@ -66,27 +67,58 @@ public class BtnUI : MonoBehaviour
         phaseSlider.interactable = false;
     }
 
-    void OnPhaseBtn()
+    void ClickPhaseBtn()
     {
-        if (showObjScript != null)
+        if(isPhaseBtnOn == true)
         {
-            showObjScript.LostnDelete();
+
+            if (showObjScript != null)
+            {
+                showObjScript.LostnDelete();
+            }
+
+            //모든 토글 Interactable = false;
+            m_Toggle_ViewAll.interactable = false;
+            m_Toggle_Frame.interactable = false;
+            m_Toggle_Wall.interactable = false;
+            m_Toggle_MEPF.interactable = false;
+            m_Toggle_Mechanical.interactable = false;
+            m_Toggle_Plumbing.interactable = false;
+            m_Toggle_FireProtection.interactable = false;
+
+            //부분별보기용 버튼(Reset/Delete) 클릭 불가
+            m_resetBtn.interactable = false;
+            m_deleteBtn.interactable = false;
+
+            //공정slider = true;
+            phaseSlider.interactable = true;
+
+            isPhaseBtnOn = false;
         }
+        else
+        {
+            if (showObjScript != null)
+            {
+                showObjScript.ToggleInit();
+            }
 
-        //모든 토글 Interactable = false;
-        m_Toggle_ViewAll.interactable = false;
-        m_Toggle_Frame.interactable = false;
-        m_Toggle_Wall.interactable = false;
-        m_Toggle_MEPF.interactable = false;
-        m_Toggle_Mechanical.interactable = false;
-        m_Toggle_Plumbing.interactable = false;
-        m_Toggle_FireProtection.interactable = false;
+            //모든 토글 Interactable = true;
+            m_Toggle_ViewAll.interactable = true;
+            m_Toggle_Frame.interactable = true;
+            m_Toggle_Wall.interactable = true;
+            m_Toggle_MEPF.interactable = true;
+            m_Toggle_Mechanical.interactable = true;
+            m_Toggle_Plumbing.interactable = true;
+            m_Toggle_FireProtection.interactable = true;
 
-        //부분별보기용 버튼(Reset/Delete) 클릭 불가
-        m_resetBtn.interactable = false;
-        m_deleteBtn.interactable = false;
+            //부분별보기용 버튼(Reset/Delete) 클릭 가능
+            m_resetBtn.interactable = true;
+            m_deleteBtn.interactable = true;
 
-        //공정slider = true;
-        phaseSlider.interactable = true;
+            //공정slider = false;
+            phaseSlider.interactable = false;
+
+            isPhaseBtnOn = true;
+        }
     }
 }

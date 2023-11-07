@@ -598,6 +598,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1304580931}
   m_SourcePrefab: {fileID: 100100000, guid: 22aced415d4944049a3847feeb9a80a8, type: 3}
+--- !u!114 &623184259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8224956456912780604, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
+  m_PrefabInstance: {fileID: 9134271644792284277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &655832533 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9012231329613854106, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
@@ -618,6 +629,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &797875223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3918628855948004214, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
+  m_PrefabInstance: {fileID: 9134271644792284277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1090240752 stripped
@@ -1673,6 +1695,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1713647009}
     - target: {fileID: 2089319467455287164, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
+      propertyPath: m_resetBtn
+      value: 
+      objectReference: {fileID: 623184259}
+    - target: {fileID: 2089319467455287164, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
+      propertyPath: m_deleteBtn
+      value: 
+      objectReference: {fileID: 797875223}
+    - target: {fileID: 2089319467455287164, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
       propertyPath: phaseSlider
       value: 
       objectReference: {fileID: 1116388296}
@@ -1704,6 +1734,12 @@ PrefabInstance:
       propertyPath: m_Toggle_FireProtection
       value: 
       objectReference: {fileID: 195297906}
+    - target: {fileID: 3662760912831924496, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
+      propertyPath: m_text
+      value: 'Phase
+
+        On/Off'
+      objectReference: {fileID: 0}
     - target: {fileID: 4282138784873937517, guid: 5229041c3f4437a4a946259a34d7117d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
