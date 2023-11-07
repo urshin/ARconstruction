@@ -5,13 +5,13 @@ using UnityEngine.UI;
 public class ShowObjs : MonoBehaviour
 {
     #region Toggle
-    [SerializeField] Toggle m_Toggle_ViewAll;
-    [SerializeField] Toggle m_Toggle_Frame;
-    [SerializeField] Toggle m_Toggle_Wall;
-    [SerializeField] Toggle m_Toggle_MEPF;
-    [SerializeField] Toggle m_Toggle_Mechanical;
-    [SerializeField] Toggle m_Toggle_Plumbing;
-    [SerializeField] Toggle m_Toggle_FireProtection;
+    Toggle m_Toggle_ViewAll;
+    Toggle m_Toggle_Frame;
+    Toggle m_Toggle_Wall;
+    Toggle m_Toggle_MEPF;
+    Toggle m_Toggle_Mechanical;
+    Toggle m_Toggle_Plumbing;
+    Toggle m_Toggle_FireProtection;
     #endregion
 
     #region Button
@@ -20,23 +20,36 @@ public class ShowObjs : MonoBehaviour
     #endregion
 
     #region GameObject
-    [SerializeField] GameObject m_withoutWall;
-    [SerializeField] GameObject m_FrameObj;
-    [SerializeField] GameObject m_WallObj;
-    [SerializeField] GameObject m_MechanicalObj;
-    [SerializeField] GameObject m_PlumbingObj;
-    [SerializeField] GameObject m_FireProtectionObj;
+    GameObject m_withoutWall;
+    GameObject m_FrameObj;
+    GameObject m_WallObj;
+    GameObject m_MechanicalObj;
+    GameObject m_PlumbingObj;
+    GameObject m_FireProtectionObj;
     #endregion
 
     void Start()
     {
+        Toggle[] togglesFromManager = ResourceManager.instance.toggles;
+        m_Toggle_ViewAll = togglesFromManager[0];
+        m_Toggle_Frame = togglesFromManager[1];
+        m_Toggle_Wall = togglesFromManager[2];
+        m_Toggle_MEPF = togglesFromManager[3];
+        m_Toggle_Mechanical = togglesFromManager[4];
+        m_Toggle_Plumbing = togglesFromManager[5];
+        m_Toggle_FireProtection = togglesFromManager[6];
+
+        GameObject[] objs = ResourceManager.instance.objects;
+        m_withoutWall = objs[0];
+        m_FrameObj = objs[1];
+        m_WallObj = objs[2];
+        m_MechanicalObj = objs[3];
+        m_PlumbingObj = objs[4];
+        m_FireProtectionObj = objs[5];
+
         ToggleInit();
 
-        //각 토글에 대한 이벤트 리스너를 추가
-        Toggle[] toggles = new Toggle[]
-        { m_Toggle_ViewAll, m_Toggle_Frame, m_Toggle_Wall, m_Toggle_MEPF, m_Toggle_Mechanical, m_Toggle_Plumbing, m_Toggle_FireProtection };
-
-        foreach (Toggle toggle in toggles)
+        foreach (Toggle toggle in togglesFromManager)
         {
             toggle.onValueChanged.AddListener(delegate
             {

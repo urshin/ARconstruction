@@ -1,121 +1,19 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using UnityEngine.UI;
-
-//public class BtnUI : MonoBehaviour
-//{
-//    ShowObjs showObjScript;
-
-//    #region Toggle
-//    [SerializeField] Toggle m_Toggle_ViewAll;
-//    [SerializeField] Toggle m_Toggle_Frame;
-//    [SerializeField] Toggle m_Toggle_Wall;
-//    [SerializeField] Toggle m_Toggle_MEPF;
-//    [SerializeField] Toggle m_Toggle_Mechanical;
-//    [SerializeField] Toggle m_Toggle_Plumbing;
-//    [SerializeField] Toggle m_Toggle_FireProtection;
-//    #endregion
-
-//    #region Button
-//    [SerializeField] Button m_resetBtn;
-//    [SerializeField] Button m_deleteBtn;
-//    [SerializeField] Button m_phaseBtn;
-//    #endregion
-
-//    [SerializeField] Slider phaseSlider;
-
-//    public GameObject dropdownMenu; // 드롭 다운 메뉴
-//    private bool isMenuActive = false;
-//    bool isPhaseBtnOn = true;
-
-//    private void Start()
-//    {
-//        UIInit();
-
-//        showObjScript = FindObjectOfType<ShowObjs>();
-
-//        m_phaseBtn.onClick.AddListener(ClickPhaseBtn);
-//    }
-
-//    public void ToggleDropDown()
-//    {
-//        isMenuActive = !isMenuActive;
-//        dropdownMenu.SetActive(isMenuActive);
-//    }
-
-//    void UIInit()
-//    {
-//        SetToggleInteractable(true);
-//        SetButtonInteractable(true);
-//        SetPhaseSliderInteractable(false);
-//        dropdownMenu.SetActive(false); // 메뉴 비활성화
-//    }
-
-//    void ClickPhaseBtn()
-//    {
-//        isPhaseBtnOn = !isPhaseBtnOn;
-
-//        if (showObjScript != null)
-//        {
-//            if (isPhaseBtnOn)
-//            {
-//                showObjScript.ToggleInit();
-//            }
-//            else
-//            {
-//                showObjScript.LostnDelete();
-//            }
-//        }
-
-//        SetToggleInteractable(!isPhaseBtnOn);
-//        SetButtonInteractable(!isPhaseBtnOn);
-//        SetPhaseSliderInteractable(isPhaseBtnOn);
-//    }
-
-//    void SetToggleInteractable(bool interactable)
-//    {
-//        m_Toggle_ViewAll.interactable = interactable;
-//        m_Toggle_Frame.interactable = interactable;
-//        m_Toggle_Wall.interactable = interactable;
-//        m_Toggle_MEPF.interactable = interactable;
-//        m_Toggle_Mechanical.interactable = interactable;
-//        m_Toggle_Plumbing.interactable = interactable;
-//        m_Toggle_FireProtection.interactable = interactable;
-//    }
-
-//    void SetButtonInteractable(bool interactable)
-//    {
-//        m_resetBtn.interactable = interactable;
-//        m_deleteBtn.interactable = interactable;
-//    }
-
-//    void SetPhaseSliderInteractable(bool interactable)
-//    {
-//        phaseSlider.interactable = interactable;
-//        phaseSlider.value = interactable ? 0 : phaseSlider.value;
-//    }
-//}
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class BtnUI : MonoBehaviour
 {
-    ShowObjs showObjScript;
-
     #region Toggle
-    [SerializeField] Toggle m_Toggle_ViewAll;
-    [SerializeField] Toggle m_Toggle_Frame;
-    [SerializeField] Toggle m_Toggle_Wall;
-    [SerializeField] Toggle m_Toggle_MEPF;
-    [SerializeField] Toggle m_Toggle_Mechanical;
-    [SerializeField] Toggle m_Toggle_Plumbing;
-    [SerializeField] Toggle m_Toggle_FireProtection;
+    Toggle m_Toggle_ViewAll;
+    Toggle m_Toggle_Frame;
+    Toggle m_Toggle_Wall;
+    Toggle m_Toggle_MEPF;
+    Toggle m_Toggle_Mechanical;
+    Toggle m_Toggle_Plumbing;
+    Toggle m_Toggle_FireProtection;
     #endregion
 
     #region Button
@@ -125,10 +23,9 @@ public class BtnUI : MonoBehaviour
     #endregion
 
     [SerializeField] Slider phaseSlider;
-
+    ShowObjs showObjScript;
     public GameObject dropdownMenu; // 드롭 다운 메뉴
     private bool isMenuActive = false; //MEPF 토글 체크박스 bool값
-
     bool isPhaseBtnOn = true; //공정버튼 on/off 구분용 bool값
 
     private void Start()
@@ -136,7 +33,7 @@ public class BtnUI : MonoBehaviour
         //전체 UI 초기화
         UIInit();
 
-        //showObgScript
+        //showObgScript 참조
         showObjScript = FindObjectOfType<ShowObjs>();
 
         m_phaseBtn.onClick.AddListener(delegate
@@ -153,6 +50,15 @@ public class BtnUI : MonoBehaviour
 
     void UIInit()
     {
+        Toggle[] togglesFromManager = ResourceManager.instance.toggles;
+        m_Toggle_ViewAll = togglesFromManager[0];
+        m_Toggle_Frame = togglesFromManager[1];
+        m_Toggle_Wall = togglesFromManager[2];
+        m_Toggle_MEPF = togglesFromManager[3];
+        m_Toggle_Mechanical = togglesFromManager[4];
+        m_Toggle_Plumbing = togglesFromManager[5];
+        m_Toggle_FireProtection = togglesFromManager[6];
+
         //모든 토글 Interactable = true;
         m_Toggle_ViewAll.interactable = true;
         m_Toggle_Frame.interactable = true;
