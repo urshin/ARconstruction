@@ -1,3 +1,101 @@
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.UI;
+
+//public class BtnUI : MonoBehaviour
+//{
+//    ShowObjs showObjScript;
+
+//    #region Toggle
+//    [SerializeField] Toggle m_Toggle_ViewAll;
+//    [SerializeField] Toggle m_Toggle_Frame;
+//    [SerializeField] Toggle m_Toggle_Wall;
+//    [SerializeField] Toggle m_Toggle_MEPF;
+//    [SerializeField] Toggle m_Toggle_Mechanical;
+//    [SerializeField] Toggle m_Toggle_Plumbing;
+//    [SerializeField] Toggle m_Toggle_FireProtection;
+//    #endregion
+
+//    #region Button
+//    [SerializeField] Button m_resetBtn;
+//    [SerializeField] Button m_deleteBtn;
+//    [SerializeField] Button m_phaseBtn;
+//    #endregion
+
+//    [SerializeField] Slider phaseSlider;
+
+//    public GameObject dropdownMenu; // 드롭 다운 메뉴
+//    private bool isMenuActive = false;
+//    bool isPhaseBtnOn = true;
+
+//    private void Start()
+//    {
+//        UIInit();
+
+//        showObjScript = FindObjectOfType<ShowObjs>();
+
+//        m_phaseBtn.onClick.AddListener(ClickPhaseBtn);
+//    }
+
+//    public void ToggleDropDown()
+//    {
+//        isMenuActive = !isMenuActive;
+//        dropdownMenu.SetActive(isMenuActive);
+//    }
+
+//    void UIInit()
+//    {
+//        SetToggleInteractable(true);
+//        SetButtonInteractable(true);
+//        SetPhaseSliderInteractable(false);
+//        dropdownMenu.SetActive(false); // 메뉴 비활성화
+//    }
+
+//    void ClickPhaseBtn()
+//    {
+//        isPhaseBtnOn = !isPhaseBtnOn;
+
+//        if (showObjScript != null)
+//        {
+//            if (isPhaseBtnOn)
+//            {
+//                showObjScript.ToggleInit();
+//            }
+//            else
+//            {
+//                showObjScript.LostnDelete();
+//            }
+//        }
+
+//        SetToggleInteractable(!isPhaseBtnOn);
+//        SetButtonInteractable(!isPhaseBtnOn);
+//        SetPhaseSliderInteractable(isPhaseBtnOn);
+//    }
+
+//    void SetToggleInteractable(bool interactable)
+//    {
+//        m_Toggle_ViewAll.interactable = interactable;
+//        m_Toggle_Frame.interactable = interactable;
+//        m_Toggle_Wall.interactable = interactable;
+//        m_Toggle_MEPF.interactable = interactable;
+//        m_Toggle_Mechanical.interactable = interactable;
+//        m_Toggle_Plumbing.interactable = interactable;
+//        m_Toggle_FireProtection.interactable = interactable;
+//    }
+
+//    void SetButtonInteractable(bool interactable)
+//    {
+//        m_resetBtn.interactable = interactable;
+//        m_deleteBtn.interactable = interactable;
+//    }
+
+//    void SetPhaseSliderInteractable(bool interactable)
+//    {
+//        phaseSlider.interactable = interactable;
+//        phaseSlider.value = interactable ? 0 : phaseSlider.value;
+//    }
+//}
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -29,13 +127,16 @@ public class BtnUI : MonoBehaviour
     [SerializeField] Slider phaseSlider;
 
     public GameObject dropdownMenu; // 드롭 다운 메뉴
-    private bool isMenuActive = false;
-    bool isPhaseBtnOn = true;
+    private bool isMenuActive = false; //MEPF 토글 체크박스 bool값
+
+    bool isPhaseBtnOn = true; //공정버튼 on/off 구분용 bool값
 
     private void Start()
     {
+        //전체 UI 초기화
         UIInit();
 
+        //showObgScript
         showObjScript = FindObjectOfType<ShowObjs>();
 
         m_phaseBtn.onClick.AddListener(delegate
@@ -69,7 +170,7 @@ public class BtnUI : MonoBehaviour
 
     void ClickPhaseBtn()
     {
-        if(isPhaseBtnOn == true)
+        if (isPhaseBtnOn == true)
         {
 
             if (showObjScript != null)
