@@ -3,25 +3,29 @@ using System.Collections;
 
 public class ThreeAAPlanesCuttingController : MonoBehaviour
 {
-
     public GameObject planeYZ;
     public GameObject planeXZ;
     public GameObject planeXY;
-    public Material mat;
     public Vector3 positionYZ;
     public Vector3 positionXZ;
     public Vector3 positionXY;
-    public Renderer rend;
-    public GameObject RenderingObject;
+    public Renderer[] rend; // 렌더러 배열
+    public GameObject[] RenderingObject; // GameObject 배열
     // Use this for initialization
     void Start()
     {
-        rend = RenderingObject.GetComponent<Renderer>();
-        Debug.Log(rend.material.name);
-        mat = rend.material;
-        Debug.Log(mat.name);
+        // 렌더러 배열 초기화
+        rend = new Renderer[RenderingObject.Length];
+        for (int i = 0; i < RenderingObject.Length; i++)
+        {
+            rend[i] = RenderingObject[i].GetComponent<Renderer>();
+            Debug.Log(rend[i].material.name);
+            Material mat = rend[i].material;
+            Debug.Log(mat.name);
+        }
         UpdateShaderProperties();
     }
+
     void Update()
     {
         UpdateShaderProperties();
@@ -33,22 +37,14 @@ public class ThreeAAPlanesCuttingController : MonoBehaviour
         positionXZ = planeXZ.transform.position;
         positionXY = planeXY.transform.position;
 
-        if (mat.shader.name == "CrossSection/ThreeAAPlanesBSP")
+        for (int i = 0; i < rend.Length; i++)
         {
-           mat.SetVector("_Plane1Position", positionYZ);
-           mat.SetVector("_Plane2Position", positionXZ);
-            mat.SetVector("_Plane3Position", positionXY);
+            if (rend[i].material.shader.name == "CrossSection/ThreeAAPlanesBSP")
+            {
+                rend[i].material.SetVector("_Plane1Position", positionYZ);
+                rend[i].material.SetVector("_Plane2Position", positionXZ);
+                rend[i].material.SetVector("_Plane3Position", positionXY);
+            }
         }
-
-        //for (int i = 0; i < rend.materials.Length; i++)
-        //{
-        //    if (rend.materials[i].shader.name == "CrossSection/ThreeAAPlanesBSP")
-        //    {
-        //        rend.materials[i].SetVector("Plane1Position", positionYZ);
-        //        rend.materials[i].SetVector("Plane2Position", positionXZ);
-        //        rend.materials[i].SetVector("Plane3Position", positionXY);
-        //    }
-        //}
-
     }
 }
