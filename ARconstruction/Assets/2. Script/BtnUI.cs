@@ -27,7 +27,7 @@ public class BtnUI : MonoBehaviour
         showObjScript = FindObjectOfType<ShowObjs>();
 
         //ResourceManager에서 버튼 배열 참조
-        buttons = ResourceManager.instance.buttons;
+        buttons = ResourceManager.Instance.buttons;
 
         //공정 버튼 클릭 시 이벤트 리스너 할당 TogglePhase 메서드 실행
         buttons[(int)ButtonIndex.Phase].onClick.AddListener(TogglePhase);
@@ -41,7 +41,7 @@ public class BtnUI : MonoBehaviour
     private void InitializeUI()
     {
         //ResourceManager에서 Toggles 배열 참조
-        toggles = ResourceManager.instance.toggles;
+        toggles = ResourceManager.Instance.toggles;
 
         dropdownMenu.SetActive(false);
         phaseSlider.interactable = false;
@@ -59,7 +59,7 @@ public class BtnUI : MonoBehaviour
                 showObjScript.LostnDelete();
             else
                 //ViewAll토글.isOn = true; 상태로
-                showObjScript.ToggleInit();
+                showObjScript.Initialize();
         }
 
         //공정버튼 on일 경우 토글/기타 버튼들 Interactable = false;

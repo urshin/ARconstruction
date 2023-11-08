@@ -9,7 +9,7 @@ public class ThreeAAPlanesCuttingController : MonoBehaviour
     public Vector3 positionYZ;
     public Vector3 positionXZ;
     public Vector3 positionXY;
-    public Renderer[] rend; // 렌더러 배열
+    [SerializeField] Renderer[] rend; // 렌더러 배열
     public GameObject[] RenderingObject; // GameObject 배열
     // Use this for initialization
     void Start()
@@ -33,9 +33,9 @@ public class ThreeAAPlanesCuttingController : MonoBehaviour
 
     private void UpdateShaderProperties()
     {
-        positionYZ = planeYZ.transform.position;
-        positionXZ = planeXZ.transform.position;
-        positionXY = planeXY.transform.position;
+        positionYZ = planeYZ.transform.localPosition;
+        positionXZ = planeXZ.transform.localPosition;
+        positionXY = planeXY.transform.localPosition;
 
         for (int i = 0; i < rend.Length; i++)
         {

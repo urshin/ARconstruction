@@ -8,18 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: '[Translucent Glass Gray]'
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: d148d5478e6a24341b40da3c6a0f9ffa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -81,5 +80,12 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0.7169812, g: 0.2529726, b: 0.2529726, a: 0.5}
+    - _CrossColor: {r: 0.7176471, g: 0.25490198, b: 0.25490198, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Plane1Normal: {r: 0, g: 1, b: 0, a: 0}
+    - _Plane1Position: {r: 0, g: 0, b: 0, a: 1}
+    - _Plane2Normal: {r: 1, g: 0, b: 0, a: 0}
+    - _Plane2Position: {r: 0, g: 0, b: 0, a: 1}
+    - _Plane3Normal: {r: 0, g: 0, b: -1, a: 0}
+    - _Plane3Position: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

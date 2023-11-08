@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : SingletonBehaviour<ResourceManager> //ΩÃ±€≈Ê ªÛº”
 {
-    public static ResourceManager instance;
-
+    //¿ŒΩ∫∆Â≈Õø°º≠ ≥÷æÓ¡‹
     public Toggle[] toggles;
     public GameObject[] objects;
     public Button[] buttons;
 
     private void Awake()
     {
-        ResourceManager.instance = this;
+        base.Awake();
     }
 }
