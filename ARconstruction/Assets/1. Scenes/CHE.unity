@@ -307,8 +307,10 @@ MonoBehaviour:
   - {fileID: 1834221519}
   - {fileID: 2019109438}
   - {fileID: 2094105290}
-  m_resetBtn: {fileID: 623184259}
-  m_deleteBtn: {fileID: 797875223}
+  buttons:
+  - {fileID: 623184259}
+  - {fileID: 797875223}
+  - {fileID: 1713647009}
 --- !u!4 &285334204
 Transform:
   m_ObjectHideFlags: 0
@@ -760,12 +762,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1116388296}
-  m_withoutWall: {fileID: 5113018206481271139}
-  m_FrameObj: {fileID: 1517019690}
-  m_WallObj: {fileID: 5113018206481271140}
-  m_MechanicalObj: {fileID: 1834221519}
-  m_PlumbingObj: {fileID: 2019109438}
-  m_FireProtectionObj: {fileID: 2094105290}
 --- !u!1 &1339644069
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038c86cf75873ce488fe6ca16014efc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageManager: {fileID: 0}
 --- !u!1 &1350796028
 GameObject:
   m_ObjectHideFlags: 0

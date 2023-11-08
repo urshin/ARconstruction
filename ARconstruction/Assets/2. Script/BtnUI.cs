@@ -59,7 +59,7 @@ public class BtnUI : MonoBehaviour
                 showObjScript.LostnDelete();
             else
                 //ViewAll토글.isOn = true; 상태로
-                showObjScript.ToggleInit();
+                showObjScript.Initialize();
         }
 
         //공정버튼 on일 경우 토글/기타 버튼들 Interactable = false;
