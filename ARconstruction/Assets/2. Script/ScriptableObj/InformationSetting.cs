@@ -14,6 +14,7 @@ public class InformationSetting : MonoBehaviour
 
     public string fileName;
 
+    public string objID;
 
     [SerializeField] TextMeshProUGUI productName;
     [SerializeField] TextMeshProUGUI productCategory;
@@ -50,7 +51,7 @@ public class InformationSetting : MonoBehaviour
         public ObjData[] ObjectInformation;
     }
 
-    public IEnumerator LoadObjDataFromJson(string fileName)
+    public IEnumerator LoadObjDataFromJson()
     {
 
 
@@ -69,15 +70,23 @@ public class InformationSetting : MonoBehaviour
             ObjectInfo objList = JsonUtility.FromJson<ObjectInfo>(jsonData);
 
 
-            productName.text = objList.ObjectInformation[0].productName;
-            productCategory.text = objList.ObjectInformation[0].productCategory;
-            productMaterial.text = objList.ObjectInformation[0].productMaterial;
-            Floor.text = objList.ObjectInformation[0].Floor;
-            objectSize.text = objList.ObjectInformation[0].objectSize;
-            workFlow.text = objList.ObjectInformation[0].workFlow;
-            startDate.text = objList.ObjectInformation[0].startDate;
-            endDate.text = objList.ObjectInformation[0].endDate;
-            currentStatus.text = objList.ObjectInformation[0].currentStatus;
+            for (int i = 0; i < objList.ObjectInformation.Length; i++) 
+            {
+                if(objList.ObjectInformation[i].productName == objID)
+                {
+                    productName.text = objList.ObjectInformation[i].productName;
+                    productCategory.text = objList.ObjectInformation[i].productCategory;
+                    productMaterial.text = objList.ObjectInformation[i].productMaterial;
+                    Floor.text = objList.ObjectInformation[i].Floor;
+                    objectSize.text = objList.ObjectInformation[i].objectSize;
+                    workFlow.text = objList.ObjectInformation[i].workFlow;
+                    startDate.text = objList.ObjectInformation[i].startDate;
+                    endDate.text = objList.ObjectInformation[i].endDate;
+                    currentStatus.text = objList.ObjectInformation[i].currentStatus;
+                }
+        
+            }
+       
 
         }
 

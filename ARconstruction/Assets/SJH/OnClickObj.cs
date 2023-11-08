@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -41,7 +42,8 @@ public class TouchMgr : MonoBehaviour
                 }
 
                 string objectName = closesHit.transform.name;
-                StartCoroutine(InformationSetting.Instance.LoadObjDataFromJson("ObjInfo"));
+                InformationSetting.Instance.objID = objectName;
+                StartCoroutine(InformationSetting.Instance.LoadObjDataFromJson());
 
             }   
         }
