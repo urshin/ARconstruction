@@ -15,7 +15,7 @@ public class ShowObjs : MonoBehaviour
     void Start()
     {
         //ResourceManager에서 리소스 로드
-        var resourceManager = ResourceManager.instance;
+        var resourceManager = ResourceManager.Instance;
         toggles = resourceManager.toggles;
         objs = resourceManager.objects;
         buttons = resourceManager.buttons;

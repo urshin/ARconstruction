@@ -10,7 +10,7 @@ public class SliderBar : MonoBehaviour
     void Start()
     {
         // ResourceManager에서 오브젝트를 가져와 배열에 저장
-        gameObjects = ResourceManager.instance.objects;
+        gameObjects = ResourceManager.Instance.objects;
 
         // Slider의 값이 변경될 때 호출될 메서드 설정
         slider.onValueChanged.AddListener(OnSliderValueChanged);

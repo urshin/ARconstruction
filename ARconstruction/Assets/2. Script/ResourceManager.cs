@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : SingletonBehaviour<ResourceManager> //ΩÃ±€≈Ê ªÛº”
 {
-    public static ResourceManager instance;
+    //public static ResourceManager instance;
 
     public Toggle[] toggles;
     public GameObject[] objects;
@@ -13,6 +13,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
-        ResourceManager.instance = this;
+        base.Awake();
+        //ResourceManager.instance = this;
     }
 }
