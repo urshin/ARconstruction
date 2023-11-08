@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: '[Color E06]'
+  m_Name: '[Color E03]'
   m_Shader: {fileID: 4800000, guid: b42f1ab5d8353214ab7616620a82e483, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -78,8 +78,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.9063317, g: 0.9063317, b: 0, a: 1}
-    - _CrossColor: {r: 0.90588236, g: 0.90588236, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 0.66223466, a: 1}
+    - _CrossColor: {r: 1, g: 1, b: 0.6627451, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Plane1Position: {r: 0, g: 0, b: 0, a: 1}
     - _Plane2Position: {r: 0, g: 0, b: 0, a: 1}
