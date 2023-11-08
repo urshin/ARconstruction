@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class ResourceManager : SingletonBehaviour<ResourceManager> //ΩÃ±€≈Ê ªÛº”
 {
-    //public static ResourceManager instance;
-
+    //¿ŒΩ∫∆Â≈Õø°º≠ ≥÷æÓ¡‹
     public Toggle[] toggles;
     public GameObject[] objects;
     public Button[] buttons;
@@ -14,6 +13,5 @@ public class ResourceManager : SingletonBehaviour<ResourceManager> //ΩÃ±€≈Ê ªÛº”
     private void Awake()
     {
         base.Awake();
-        //ResourceManager.instance = this;
     }
 }

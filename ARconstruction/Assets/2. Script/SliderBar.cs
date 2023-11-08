@@ -25,20 +25,24 @@ public class SliderBar : MonoBehaviour
         switch (value)
         {
             case 0:
-                SetActiveObjects(false);
+                //모든 오브젝트 비활성화
+                SetActiveObjects(false); 
                 break;
             case 1:
-                SetActiveForIndices(true, 3, 4, 5);
+                //Mechanical, Plumbing, FireProtection 활성화
+                SetActiveForIndices(true, 3, 4, 5); 
                 break;
             case 2:
+                //Frame 추가 활성화
                 SetActiveForIndices(true, 1, 3, 4, 5);
                 break;
             case 3:
+                //Wall 추가 활성화, Frame 비활성화 (Wall과 겹치면 안되기 때문에)
                 SetActiveForIndices(true, 2, 3, 4, 5);
                 break;
             default:
-                gameObjects[0].SetActive(true);
-                SetActiveForIndices(true, 2, 3, 4, 5);
+                //Frame제외 모든 Objs 활성화
+                SetActiveForIndices(true, 0, 2, 3, 4, 5);
                 break;
         }
     }

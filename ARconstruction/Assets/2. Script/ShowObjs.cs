@@ -46,6 +46,7 @@ public class ShowObjs : MonoBehaviour
     }
     private void AddTogglesListeners()
     {
+        //모든 토글에 이벤트 리스너 추가
         foreach (Toggle toggle in toggles)
         {
             toggle.onValueChanged.AddListener(isOn => OnToggleValueChanged(toggle));
@@ -53,6 +54,7 @@ public class ShowObjs : MonoBehaviour
     }
     private void AddButtonListeners()
     {
+        //Reset, Delete 버튼에 이벤트 리스너 추가
         buttons[(int)Btn_Index.Reset].onClick.AddListener(Initialize);
         buttons[(int)Btn_Index.Delete].onClick.AddListener(LostnDelete);
     }
@@ -61,26 +63,32 @@ public class ShowObjs : MonoBehaviour
     {
         bool isToggleOn = toggle.isOn;
 
+        //ViewAll 토글 체크일 경우
         if(toggle == toggles[(int)Toggle_Index.ViewAll])
         {
             SetViewAllToggleState(toggle);
         }
         else
         {
+            //ViewAll토글 외 다른 토글이 체크될 경우
             if (isToggleOn)
             {
+                //ViewAll토글 체크 해제
                 toggles[(int)Toggle_Index.ViewAll].isOn = false;
             }
             
+            //Frame 토글 클릭 시
             if(toggle == toggles[(int)Toggle_Index.Frame])
             {
                 objs[(int)Obj_Index.Frame].SetActive(toggle.isOn);
             }
-            else if(toggle == toggles[(int)Toggle_Index.Wall])
+            //Wall 토글 클릭 시
+            else if (toggle == toggles[(int)Toggle_Index.Wall])
             {
                 objs[(int)Obj_Index.Wall].SetActive(toggle.isOn);
             }
-            else if(toggle == toggles[(int)Toggle_Index.MEPF] && !toggle.isOn)
+            //MEPF 토글 클릭 시
+            else if (toggle == toggles[(int)Toggle_Index.MEPF] && !toggle.isOn)
             {
                 // MEPF 토글이 해제되면 다른 하위 토글들도 해제
                 for (int i = (int)Toggle_Index.Mechanical; i <= (int)Toggle_Index.FireProtection; i++)
@@ -88,15 +96,18 @@ public class ShowObjs : MonoBehaviour
                     toggles[i].isOn = false;
                 }
             }
-            else if(toggle == toggles[(int)Toggle_Index.Mechanical])
+            //Mechanical 토글 클릭 시
+            else if (toggle == toggles[(int)Toggle_Index.Mechanical])
             {
                 objs[(int)Obj_Index.Mechanical].SetActive(toggle.isOn);
             }
-            else if(toggle == toggles[(int)Toggle_Index.Plumbing])
+            //Plumbing 토글 클릭 시
+            else if (toggle == toggles[(int)Toggle_Index.Plumbing])
             {
                 objs[(int)Obj_Index.Plumbing].SetActive(toggle.isOn);
             }
-            else if(toggle == toggles[(int)Toggle_Index.FireProtection])
+            //FireProtection 토글 클릭 시
+            else if (toggle == toggles[(int)Toggle_Index.FireProtection])
             {
                 objs[(int)Obj_Index.FireProtection].SetActive(toggle.isOn);
             }
@@ -116,13 +127,14 @@ public class ShowObjs : MonoBehaviour
             }
         }
 
+        //건물 외관 Objs만 활성화
         objs[(int)Obj_Index.WithoutWall].SetActive(viewAllEnabled);
         objs[(int)Obj_Index.Wall].SetActive(viewAllEnabled);
     }
 
     public void LostnDelete()
     {
-        //모든 토글 선택해제
+        //모든 토글 선택해제 -> 모든 Objs들 비활성화됨
         for(int i = 0; i < toggles.Length; i++)
         {
             toggles[i].isOn = false;
