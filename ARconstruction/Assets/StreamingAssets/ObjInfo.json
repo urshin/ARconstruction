@@ -1,0 +1,60 @@
+{
+    "ObjectInformation": [
+        {
+            "productName": "RoofTop",
+            "productCategory": "Frame",
+            "productMaterial": "Concreat",
+            "Floor": "2F",
+            "objectSize": "200A",
+            "workFlow": "2",
+            "startDate": "2023.11.06",
+            "endDate": "2023.11.16",
+            "currentStatus": "Todo"
+        },
+        {
+            "productName": "WaterPipeLine",
+            "productCategory": "MEPF",
+            "productMaterial": "PVC",
+            "Floor": "B1",
+            "objectSize": "200A",
+            "workFlow": "1",
+            "startDate": "2023.11.06",
+            "endDate": "2023.11.16",
+            "currentStatus": "Todo"
+        },
+        {
+            "productName": "AirPipeLine",
+            "productCategory": "MEPF",
+            "productMaterial": "PVC",
+            "Floor": "1F",
+            "objectSize": "100A",
+            "workFlow": "3",
+            "startDate": "2023.11.06",
+            "endDate": "2023.11.16",
+            "currentStatus": "Todo"
+        },
+        {
+            "productName": "FirstFloor",
+            "productCategory": "Frame",
+            "productMaterial": "Concreat",
+            "Floor": "1F",
+            "objectSize": "200A",
+            "workFlow": "2",
+            "startDate": "2023.11.06",
+            "endDate": "2023.11.16",
+            "currentStatus": "Todo"
+        },
+        {
+            "productName": "SecondFloor",
+            "productCategory": "Frame",
+            "productMaterial": "Concreat",
+            "Floor": "2F",
+            "objectSize": "200A",
+            "workFlow": "2",
+            "startDate": "2023.11.06",
+            "endDate": "2023.11.16",
+            "currentStatus": "Todo"
+        }
+    ]
+
+}

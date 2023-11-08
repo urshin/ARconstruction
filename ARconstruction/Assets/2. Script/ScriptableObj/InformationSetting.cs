@@ -6,15 +6,14 @@ using System.IO;
 using UnityEditor;
 using LitJson;
 using UnityEngine.Networking;
+using Unity.VisualScripting;
 
 public class InformationSetting : MonoBehaviour
 {
     public static InformationSetting Instance;
-    public ObjData objData;
 
     public string fileName;
 
-    public TextMeshProUGUI textMeshProUGUI;
 
     [SerializeField] TextMeshProUGUI productName;
     [SerializeField] TextMeshProUGUI productCategory;
@@ -38,18 +37,6 @@ public class InformationSetting : MonoBehaviour
             Destroy(Instance);
         }
     }
-    void Update()
-    {
-        productName.text = objData.productName;
-        productCategory.text = objData.productCategory;
-        productMaterial.text = objData.productMaterial;
-        Floor.text = objData.Floor;
-        objectSize.text = objData.objectSize;
-        workFlow.text = objData.workFlow;
-        startDate.text = objData.startDate;
-        endDate.text = objData.endDate;
-        currentStatus.text = objData.currentStatus;
-    }
 
     /*  public void LoadObjDataFromJson(string fileName)
       {
@@ -58,16 +45,16 @@ public class InformationSetting : MonoBehaviour
           string jsonData = File.ReadAllText(path);
           objData = JsonUtility.FromJson<ObjData>(jsonData);
       }*/
-
-    public void Start()
+    public class ObjectInfo
     {
-        //StartCoroutine(LoadObjDataFromJson(fileName));
+        public ObjData[] ObjectInformation;
     }
 
-    // JSON 데이터를 읽어와서 처리하는 코루틴입니다.
     public IEnumerator LoadObjDataFromJson(string fileName)
     {
-        string path = System.IO.Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+
+
+        string path = Path.Combine(Application.streamingAssetsPath, "ObjInfo.json");
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         path = "jar:file://" + Application.streamingAssetsPath + "/" + fileName + ".json";
@@ -79,7 +66,20 @@ public class InformationSetting : MonoBehaviour
             yield return www.SendWebRequest();
             // JSON 데이터를 문자열로 읽어옵니다.
             string jsonData = www.downloadHandler.text;
-            objData = JsonUtility.FromJson<ObjData>(jsonData);
+            ObjectInfo objList = JsonUtility.FromJson<ObjectInfo>(jsonData);
+
+
+            productName.text = objList.ObjectInformation[0].productName;
+            productCategory.text = objList.ObjectInformation[0].productCategory;
+            productMaterial.text = objList.ObjectInformation[0].productMaterial;
+            Floor.text = objList.ObjectInformation[0].Floor;
+            objectSize.text = objList.ObjectInformation[0].objectSize;
+            workFlow.text = objList.ObjectInformation[0].workFlow;
+            startDate.text = objList.ObjectInformation[0].startDate;
+            endDate.text = objList.ObjectInformation[0].endDate;
+            currentStatus.text = objList.ObjectInformation[0].currentStatus;
+
         }
+
     }
 }
