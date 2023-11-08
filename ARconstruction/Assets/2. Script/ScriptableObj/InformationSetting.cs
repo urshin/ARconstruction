@@ -83,6 +83,7 @@ public class InformationSetting : MonoBehaviour
                     startDate.text = objList.ObjectInformation[i].startDate;
                     endDate.text = objList.ObjectInformation[i].endDate;
                     currentStatus.text = objList.ObjectInformation[i].currentStatus;
+                    break;
                 }
         
             }
