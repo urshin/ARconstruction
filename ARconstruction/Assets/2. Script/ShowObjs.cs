@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShowObjs : MonoBehaviour
 {
     enum Toggle_Index { ViewAll, Frame, Wall, MEPF, Mechanical, Plumbing, FireProtection }
-    enum Btn_Index { Reset, Delete, Phase }
+    enum Btn_Index { Reset, Delete, Phase,PopUp }
     enum Obj_Index { Else, Frame, Wall, Mechanical, Plumbing, FireProtection }
     
     Toggle[] toggles;
@@ -57,6 +57,7 @@ public class ShowObjs : MonoBehaviour
         //Reset, Delete 버튼에 이벤트 리스너 추가
         buttons[(int)Btn_Index.Reset].onClick.AddListener(Initialize);
         buttons[(int)Btn_Index.Delete].onClick.AddListener(LostnDelete);
+        buttons[(int)Btn_Index.PopUp].onClick.AddListener(PopUp);
     }
 
     void OnToggleValueChanged(Toggle toggle)
@@ -126,6 +127,21 @@ public class ShowObjs : MonoBehaviour
             {
                 objs[(int)Obj_Index.FireProtection].SetActive(toggle.isOn);
             }
+        }
+    }
+    [SerializeField] GameObject _PopUp;
+    bool ispopup =false;
+    public void PopUp()
+    {
+        ispopup = !ispopup;
+
+        if(ispopup)
+        {
+            _PopUp.SetActive(true);
+        }
+        else
+        {
+            _PopUp.SetActive(true);
         }
     }
 
