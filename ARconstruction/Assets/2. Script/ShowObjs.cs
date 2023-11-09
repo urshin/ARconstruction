@@ -7,7 +7,7 @@ public class ShowObjs : MonoBehaviour
 {
     enum Toggle_Index { ViewAll, Frame, Wall, MEPF, Mechanical, Plumbing, FireProtection }
     enum Btn_Index { Reset, Delete, Phase }
-    enum Obj_Index { WithoutWall, Frame, Wall, Mechanical, Plumbing, FireProtection }
+    enum Obj_Index { Else, Frame, Wall, Mechanical, Plumbing, FireProtection }
     
     Toggle[] toggles;
     Button[] buttons;
@@ -38,10 +38,9 @@ public class ShowObjs : MonoBehaviour
         }
 
         //오브젝트 초기 설정
-        for (int i = 0; i<objs.Length; i++)
+        for (int i = 0; i < objs.Length; i++)
         {
-            //건물 외관 오브젝트만 활성화
-            objs[i].SetActive(i == (int)Obj_Index.WithoutWall || i == (int)Obj_Index.Wall);
+            objs[i].SetActive(true);
         }
     }
     private void AddTogglesListeners()
@@ -66,7 +65,22 @@ public class ShowObjs : MonoBehaviour
         //ViewAll 토글 체크일 경우
         if(toggle == toggles[(int)Toggle_Index.ViewAll])
         {
-            SetViewAllToggleState(toggle);
+            Debug.Log("들어왔다");
+
+            if (isToggleOn)
+            {
+                // ViewAll외 다른 토글 체크해제
+                for (int i = (int)Toggle_Index.Frame; i <= (int)Toggle_Index.FireProtection; i++)
+                {
+                    toggles[i].isOn = !isToggleOn;
+                }
+            }
+
+            //모든 오브젝트 활성화
+            for (int i = 0; i < objs.Length; i++)
+            {
+                objs[i].SetActive(isToggleOn);
+            }
         }
         else
         {
@@ -114,24 +128,6 @@ public class ShowObjs : MonoBehaviour
         }
     }
 
-    void SetViewAllToggleState(Toggle toggle)
-    {
-        bool viewAllEnabled = toggle.isOn;
-
-        if (viewAllEnabled)
-        {
-            // ViewAll외 다른 토글 체크해제
-            for (int i = (int)Toggle_Index.Frame; i <= (int)Toggle_Index.FireProtection; i++)
-            {
-                toggles[i].isOn = !viewAllEnabled;
-            }
-        }
-
-        //건물 외관 Objs만 활성화
-        objs[(int)Obj_Index.WithoutWall].SetActive(viewAllEnabled);
-        objs[(int)Obj_Index.Wall].SetActive(viewAllEnabled);
-    }
-
     public void LostnDelete()
     {
         //모든 토글 선택해제 -> 모든 Objs들 비활성화됨
@@ -139,5 +135,7 @@ public class ShowObjs : MonoBehaviour
         {
             toggles[i].isOn = false;
         }
+
+        objs[(int)Obj_Index.Else].SetActive(false);
     }
 }
