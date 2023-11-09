@@ -43,8 +43,7 @@ public class TouchMgr : MonoBehaviour
                 }
 
                 string objectName = closesHit.transform.name;
-                InformationSetting.Instance.objID = objectName;
-                StartCoroutine(InformationSetting.Instance.LoadObjDataFromJson());
+                InformationSetting.Instance.UpdateUI(objectName);
 
             }   
         }

@@ -135,14 +135,7 @@ public class ShowObjs : MonoBehaviour
     {
         ispopup = !ispopup;
 
-        if(ispopup)
-        {
-            _PopUp.SetActive(true);
-        }
-        else
-        {
-            _PopUp.SetActive(true);
-        }
+        _PopUp.SetActive(ispopup);
     }
 
     public void LostnDelete()
