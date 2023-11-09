@@ -11,7 +11,7 @@ public class BtnUI : MonoBehaviour
     Button[] buttons;
 
     [SerializeField] private Slider phaseSlider;
-    [SerializeField] private GameObject dropdownMenu; //MEDF토글 활성화시 나오는 드롭다운메뉴
+    [SerializeField] private GameObject dropdownMenu; //MEDF토글 활성화 시 나오는 드롭다운메뉴
 
     private bool isMenuActive = false; // Dropdown 메뉴 active값
     private bool isPhaseBtnOn = false; // 공정버튼 on/off bool값
@@ -40,7 +40,7 @@ public class BtnUI : MonoBehaviour
     }
     private void InitializeUI()
     {
-        //ResourceManager에서 Toggles 배열 참조
+        //ResourceManager에서 리소스 로드
         toggles = ResourceManager.Instance.toggles;
 
         dropdownMenu.SetActive(false);
@@ -52,14 +52,13 @@ public class BtnUI : MonoBehaviour
 
     private void BtnPhase()
     {
-        //버튼 눌리면 isPhaseBtnOn bool값 변경
+        //버튼 클릭 시 bool값 변경
         isPhaseBtnOn = !isPhaseBtnOn;
 
         if (showObjScript != null)
         {
             if (isPhaseBtnOn)
             {
-                Debug.Log("공정버튼켜짐");
                 //모든 Objs.SetActive = false; 상태로
                 showObjScript.LostnDelete();
                 //공정버튼 on일 경우 토글/기타 버튼들 Interactable = false;
@@ -68,8 +67,6 @@ public class BtnUI : MonoBehaviour
 
             else
             {
-                Debug.Log("공정버튼꺼짐");
-                Debug.Log($"지금 isphaseBtnOn의 상태: {isPhaseBtnOn}");
                 //공정버튼off되면 슬라이더 값 0으로 초기화
                 phaseSlider.value = 0;
                 SetTogglenBtnInteractable(!isPhaseBtnOn);

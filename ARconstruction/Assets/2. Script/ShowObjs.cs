@@ -40,6 +40,7 @@ public class ShowObjs : MonoBehaviour
         //오브젝트 초기 설정
         for (int i = 0; i < objs.Length; i++)
         {
+            //모든 오브젝트 활성화
             objs[i].SetActive(true);
         }
     }
@@ -60,13 +61,13 @@ public class ShowObjs : MonoBehaviour
 
     void OnToggleValueChanged(Toggle toggle)
     {
+        //토글 체크상태에 따른 bool 변수
         bool isToggleOn = toggle.isOn;
 
         //ViewAll 토글 체크일 경우
         if(toggle == toggles[(int)Toggle_Index.ViewAll])
         {
-            Debug.Log("들어왔다");
-
+            //ViewAll토글이 체크될 경우
             if (isToggleOn)
             {
                 // ViewAll외 다른 토글 체크해제
@@ -136,6 +137,7 @@ public class ShowObjs : MonoBehaviour
             toggles[i].isOn = false;
         }
 
+        //토글별 오브젝트로 배정되지 않은 기타 구조물들(창문 등)도 삭제
         objs[(int)Obj_Index.Else].SetActive(false);
     }
 }

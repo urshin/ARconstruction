@@ -41,7 +41,7 @@ public class SliderBar : MonoBehaviour
                 SetActiveForIndices(true, 1, 2, 3, 4, 5);
                 break;
             default:
-                //Frame제외 모든 Objs 활성화
+                //모든 Objs 활성화
                 SetActiveForIndices(true, 0, 1, 2, 3, 4, 5);
                 break;
         }
