@@ -12,8 +12,6 @@ public class InformationSetting : MonoBehaviour
 {
     public static InformationSetting Instance;
 
-    public string fileName;
-
     public string objID;
 
     [SerializeField] TextMeshProUGUI productName;
@@ -50,17 +48,15 @@ public class InformationSetting : MonoBehaviour
     {
         public ObjData[] ObjectInformation;
     }
-
+    
     public IEnumerator LoadObjDataFromJson()
     {
-
-
         string path = Path.Combine(Application.streamingAssetsPath, "ObjInfo.json");
 
+        print(path);
 #if UNITY_ANDROID && !UNITY_EDITOR
-        path = "jar:file://" + Application.streamingAssetsPath + "/" + fileName + ".json";
+        path = "jar:file://" + Application.streamingAssetsPath + "/" + "ObjInfo.json";
 #endif
-
         using (UnityWebRequest www = UnityWebRequest.Get(path))
         {
             // 웹 요청을 보냅니다.
