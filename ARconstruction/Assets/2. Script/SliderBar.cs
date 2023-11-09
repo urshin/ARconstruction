@@ -37,12 +37,12 @@ public class SliderBar : MonoBehaviour
                 SetActiveForIndices(true, 1, 3, 4, 5);
                 break;
             case 3:
-                //Wall 추가 활성화, Frame 비활성화 (Wall과 겹치면 안되기 때문에)
-                SetActiveForIndices(true, 2, 3, 4, 5);
+                //Wall 추가 활성화
+                SetActiveForIndices(true, 1, 2, 3, 4, 5);
                 break;
             default:
                 //Frame제외 모든 Objs 활성화
-                SetActiveForIndices(true, 0, 2, 3, 4, 5);
+                SetActiveForIndices(true, 0, 1, 2, 3, 4, 5);
                 break;
         }
     }

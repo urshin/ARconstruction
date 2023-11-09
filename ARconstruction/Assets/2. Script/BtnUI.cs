@@ -14,7 +14,7 @@ public class BtnUI : MonoBehaviour
     [SerializeField] private GameObject dropdownMenu; //MEDF토글 활성화시 나오는 드롭다운메뉴
 
     private bool isMenuActive = false; // Dropdown 메뉴 active값
-    private bool isPhaseBtnOn = true; // 공정버튼 on/off bool값
+    private bool isPhaseBtnOn = false; // 공정버튼 on/off bool값
 
     private ShowObjs showObjScript;
 
@@ -30,7 +30,7 @@ public class BtnUI : MonoBehaviour
         buttons = ResourceManager.Instance.buttons;
 
         //공정 버튼 클릭 시 이벤트 리스너 할당 TogglePhase 메서드 실행
-        buttons[(int)ButtonIndex.Phase].onClick.AddListener(TogglePhase);
+        buttons[(int)ButtonIndex.Phase].onClick.AddListener(BtnPhase);
     }
 
     public void ToggleDropDown()
@@ -50,23 +50,33 @@ public class BtnUI : MonoBehaviour
         SetTogglesInteractable(true);
     }
 
-    private void TogglePhase()
+    private void BtnPhase()
     {
+        //버튼 눌리면 isPhaseBtnOn bool값 변경
+        isPhaseBtnOn = !isPhaseBtnOn;
+
         if (showObjScript != null)
         {
             if (isPhaseBtnOn)
+            {
+                Debug.Log("공정버튼켜짐");
                 //모든 Objs.SetActive = false; 상태로
                 showObjScript.LostnDelete();
+                //공정버튼 on일 경우 토글/기타 버튼들 Interactable = false;
+                SetTogglenBtnInteractable(!isPhaseBtnOn);
+            }
+
             else
+            {
+                Debug.Log("공정버튼꺼짐");
+                Debug.Log($"지금 isphaseBtnOn의 상태: {isPhaseBtnOn}");
+                //공정버튼off되면 슬라이더 값 0으로 초기화
+                phaseSlider.value = 0;
+                SetTogglenBtnInteractable(!isPhaseBtnOn);
                 //ViewAll토글.isOn = true; 상태로
                 showObjScript.Initialize();
+            }
         }
-
-        //공정버튼 on일 경우 토글/기타 버튼들 Interactable = false;
-        SetTogglenBtnInteractable(!isPhaseBtnOn);
-
-        //버튼 눌리면 isPhaseBtnOn bool값 변경
-        isPhaseBtnOn = !isPhaseBtnOn;
     }
 
     private void SetTogglenBtnInteractable(bool interactable)
@@ -81,8 +91,8 @@ public class BtnUI : MonoBehaviour
         //공정 슬라이더 상태 설정
         phaseSlider.interactable = !interactable;
         //공정버튼off되면 슬라이더 값 0으로 초기화
-        if (!interactable)
-            phaseSlider.value = 0;
+        //if (!interactable)
+        //    phaseSlider.value = 0;
     }
 
     private void SetTogglesInteractable(bool interactable)
