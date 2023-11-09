@@ -11,6 +11,7 @@
 		_Plane2Position("Plane2Position",Vector) = (0,0,0,1)
 		_Plane3Normal("Plane3Normal",Vector) = (0,0,-1,0)
 		_Plane3Position("Plane3Position",Vector) = (0,0,0,1)
+
 	}
 		SubShader{
 		Tags{ "RenderType" = "Transparent" }
@@ -20,6 +21,7 @@
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
 #pragma surface surf Standard fullforwardshadows
+
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 #pragma target 3.0
@@ -62,7 +64,21 @@
 
 		Cull Front
 		CGPROGRAM
-#pragma surface surf NoLighting  noambient
+
+//단순화 시키는 코드
+//#pragma surface surf NoLighting  noambient
+//#pragma surface surf BlinnPhong 
+
+#pragma surface surf Lambert fullforwardshadows
+
+
+//그림자 코드
+//#pragma multi_compile_instancing
+// 표준 Lambert 조명 모델과 하이라이트 효과를 가진 표면 쉐이더
+
+
+
+
 
 	struct Input {
 		half2 uv_MainTex;
@@ -96,7 +112,7 @@
 	void surf(Input IN, inout SurfaceOutput o)
 	{
 		if (checkVisability(IN.worldPos))discard;
-		o.Albedo = _CrossColor;
+    o.Albedo = _Color;
 
 	}
 	ENDCG
