@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -18,7 +19,8 @@ public class TouchMgr : MonoBehaviour
     void Update()
     {
         //터치의 갯수가 0 이상이고 첫 번째 터치일 경우
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) ||Input.GetMouseButton(0))
+        //if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) ||Input.GetMouseButton(0))
+        if ( Input.GetMouseButtonDown(0))
         {
             //손가락으로 터치한 스크린 좌표를 기준으로 3차원 광선을 생성
             //ray = ARCam.ScreenPointToRay(Input.GetTouch(0).position);
@@ -41,7 +43,8 @@ public class TouchMgr : MonoBehaviour
                 }
 
                 string objectName = closesHit.transform.name;
-                StartCoroutine(InformationSetting.Instance.LoadObjDataFromJson("ObjInfo"));
+                InformationSetting.Instance.objID = objectName;
+                StartCoroutine(InformationSetting.Instance.LoadObjDataFromJson());
 
             }   
         }
