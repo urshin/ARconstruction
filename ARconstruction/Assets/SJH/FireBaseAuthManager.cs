@@ -1,19 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mail;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Firebase.Auth;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 using Firebase;
 using System;
 using Firebase.Database;
-using Firebase.Firestore;
 using Firebase.Extensions;
 using Firebase.Functions;
+using BackEnd.Game;
 using Unity.PlasticSCM.Editor.WebApi;
 
 public class FireBaseAuthManager : MonoBehaviour
@@ -39,21 +34,25 @@ public class FireBaseAuthManager : MonoBehaviour
     [SerializeField] SceneChange sceneChange;
     FirebaseAuth auth;
     FirebaseUser user;
-    FirebaseFirestore firestore;
+    FirebaseFunctions functions;
     bool isSignIn = false;
     bool isLogin = false;
 
     private void Start()
     {
-        InitializeFirebase();
         
+        InitializeFirebase();
     }
+
+
     void InitializeFirebase()
     {
         FirebaseApp.DefaultInstance.Options.DatabaseUrl = new Uri(databaseUri);
+        functions = Firebase.Functions.FirebaseFunctions.DefaultInstance;
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
+
     }
 
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
@@ -134,14 +133,6 @@ public class FireBaseAuthManager : MonoBehaviour
 
     }
 
-    public void SendVerification()
-    {
-        user.SendEmailVerificationAsync().ContinueWith(task =>
-        {
-
-        });
-    }
-
     private static void SendData(FireBaseAuthManager instance)
     {
         DatabaseReference dbReference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -151,6 +142,7 @@ public class FireBaseAuthManager : MonoBehaviour
 
     }
 }
+
 
 public class UserData
 {
