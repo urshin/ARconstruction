@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "407828496634",
+    "project_id": "arconstruction-15729",
+    "storage_bucket": "arconstruction-15729.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407828496634:android:d3a444e3c9b9ebcde18943",
+        "android_client_info": {
+          "package_name": "com.UnityBootCamp.ARconstruction"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8rslZKPsf_7_0RRlOmvVVTf1h2odQhzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
