@@ -2,7 +2,7 @@
     "ObjectInformation": [
         {
             "productName": "RoofTop",
-            "productCategory": "Frame",
+            "productCategory": "Structure",
             "productMaterial": "Concreat",
             "Floor": "2F",
             "objectSize": "200A",
@@ -35,7 +35,7 @@
         },
         {
             "productName": "FirstFloor",
-            "productCategory": "Frame",
+            "productCategory": "Structure",
             "productMaterial": "Concreat",
             "Floor": "1F",
             "objectSize": "200A",
@@ -46,7 +46,7 @@
         },
         {
             "productName": "SecondFloor",
-            "productCategory": "Frame",
+            "productCategory": "Structure",
             "productMaterial": "Concreat",
             "Floor": "2F",
             "objectSize": "200A",
@@ -79,7 +79,7 @@
         },
         {
             "productName": "1F_Bone",
-            "productCategory": "Frame",
+            "productCategory": "Structure",
             "productMaterial": "Concreat",
             "Floor": "1F",
             "objectSize": "100A",
@@ -90,7 +90,7 @@
         },
         {
             "productName": "2F_Bone",
-            "productCategory": "Frame",
+            "productCategory": "Structure",
             "productMaterial": "Concreat",
             "Floor": "2F",
             "objectSize": "100A",
