@@ -9,6 +9,7 @@ using TMPro;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using UnityEngine.SceneManagement;
+using System;
 
 public class AuthManager : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class AuthManager : MonoBehaviour
     [SerializeField] TMP_InputField signInName;
     [SerializeField] TMP_InputField signInPassword;
 
-
+    [SerializeField]  GameObject signInPanel;
+    [SerializeField] GameObject signUpPanel;
     FirebaseUser user;
     FirebaseAuth auth;
     FirebaseFirestore db;
@@ -31,6 +33,11 @@ public class AuthManager : MonoBehaviour
     string emailAddress;
     string userID;
 
+    string inputSignInID;
+    string inputSignInEmail;
+
+    bool isLogIn = false;
+    bool isSignUp = false;
     private void Start()
     {
         InitializeFirebase();
@@ -39,43 +46,43 @@ public class AuthManager : MonoBehaviour
     {
         db = FirebaseFirestore.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
-        auth.StateChanged += AuthStateChanged;
-        AuthStateChanged(this, null);
+        /*        auth.StateChanged += AuthStateChanged;
+                AuthStateChanged(this, null);*/
     }
 
-    void AuthStateChanged(object sender, System.EventArgs eventArgs)
-    {
-        if (auth.CurrentUser != user)
+    /* void AuthStateChanged(object sender, System.EventArgs eventArgs)
+     {
+         if (auth.CurrentUser != user)
+         {
+             bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null
+                 && auth.CurrentUser.IsValid();
+             if (!signedIn && user != null)
+             {
+                 Debug.Log("Signed out " + user.UserId);
+             }
+             user = auth.CurrentUser;
+             if (signedIn)
+             {
+                 Debug.Log("Signed in " + user.UserId);
+                 displayName = user.DisplayName ?? "";
+                 emailAddress = user.Email ?? "";
+             }
+         }
+     }*/
+
+    /*    void OnDestroy()
         {
-            bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null
-                && auth.CurrentUser.IsValid();
-            if (!signedIn && user != null)
-            {
-                Debug.Log("Signed out " + user.UserId);
-            }
-            user = auth.CurrentUser;
-            if (signedIn)
-            {
-                Debug.Log("Signed in " + user.UserId);
-                displayName = user.DisplayName ?? "";
-                emailAddress = user.Email ?? "";
-            }
-        }
-    }
-
-    void OnDestroy()
-    {
-        auth.StateChanged -= AuthStateChanged;
-        auth = null;
-    }
+            auth.StateChanged -= AuthStateChanged;
+            auth = null;
+        }*/
 
     public void SignUpTry()
     {
         if (userName != null)
         {
-            if (userPassword.text == confirmPassword.text) 
+            if (userPassword.text == confirmPassword.text)
             {
-                UserSignUp();
+               StartCoroutine( UserSignUp());
             }
             else { print("패스워드가 일치하지 않음"); }
         }
@@ -84,9 +91,13 @@ public class AuthManager : MonoBehaviour
             print("이름칸이 비어있음");
         }
     }
-    void UserSignUp()
+    public void SignInTry()
     {
-        auth.CreateUserWithEmailAndPasswordAsync(userEmail.text, userPassword.text).ContinueWith(task =>
+        GetData(this);
+    }
+    public IEnumerator UserSignUp()
+    {
+       var longInTask = auth.CreateUserWithEmailAndPasswordAsync(userEmail.text, userPassword.text).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
@@ -99,41 +110,90 @@ public class AuthManager : MonoBehaviour
                 return;
             }
 
-            // Firebase user has been created.
             AuthResult result = task.Result;
             userID = result.User.UserId;
             SendData(this);
-            Debug.LogFormat("Firebase user created successfully: {0} ({1})",
-                result.User.DisplayName, result.User.UserId);
+            isSignUp = true;
+            Debug.LogFormat("Firebase user created successfully: {0} ({1})", result.User.DisplayName, result.User.UserId);
+
         });
+
+        yield return new WaitUntil(() => longInTask.IsCompleted);
+        ChangePanel();
+
     }
 
-    private static void SendData(AuthManager instance)
+    public void ChangePanel()
     {
-        DocumentReference docRef = instance.db.Collection("users").Document(instance.userID);
-        Dictionary<string, object> user = new Dictionary<string, object>
-{
-        { "Name", instance.userName.text },
-        { "Password", instance.userPassword.text },
-        { "Email", instance.userEmail.text },
-};
-        docRef.SetAsync(user).ContinueWithOnMainThread(task => {
-            Debug.Log("Added data to the alovelace document in the users collection.");
-        });
-    }
-
-    public class UserData
-    {
-        public string userName;
-        public string eMail;
-        public string passWord;
-
-        public UserData(string userName, string eMail, string passWord)
+        if (isSignUp)
         {
-            this.userName = userName;
-            this.eMail = eMail;
-            this.passWord = passWord;
+            signUpPanel.SetActive(false);
+            signInPanel.SetActive(true);
         }
     }
 
+    public IEnumerator SignIn()
+    {
+        var logInTask = auth.SignInWithEmailAndPasswordAsync(inputSignInEmail, signInPassword.text).ContinueWith(
+          task =>
+          {
+              if (task.IsCompleted && !task.IsFaulted && !task.IsCanceled)
+              {
+                  Debug.Log(signInName.text + " 로 로그인 하셨습니다.");
+                  isLogIn = true;
+              }
+              else
+              {
+                  Debug.Log("로그인에 실패하셨습니다.");
+              }
+          });
+
+        yield return new WaitUntil(() => logInTask.IsCompleted);
+
+        if (isLogIn == true)
+            SceneManager.LoadScene("ARconstruction");
+    }
+    private static void SendData(AuthManager instance)
+    {
+        DocumentReference docRef = instance.db.Collection("users").Document(instance.userName.text/*instance.userID*/);
+        UserData userData = new UserData
+        {
+            UserName = instance.userName.text,
+            PassWord = instance.userPassword.text,
+            EMail = instance.userEmail.text,
+        };
+        docRef.SetAsync(userData);
+    }
+    private static void GetData(AuthManager instance)
+    {
+        DocumentReference docRef = instance.db.Collection("users").Document(instance.signInName.text);
+        docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            var snapshot = task.Result;
+            if (snapshot.Exists)
+            {
+                UserData userData = snapshot.ConvertTo<UserData>();
+                instance.inputSignInID = userData.UserName;
+                instance.inputSignInEmail = userData.EMail;
+
+                if (instance.signInName.text == instance.inputSignInID)
+                {
+                    instance.StartCoroutine(instance.SignIn());
+                }
+            }
+            else
+            {
+                Debug.Log(String.Format("Document {0} does not exist!", snapshot.Id));
+            }
+        });
+
+    }
+
+}
+[FirestoreData]
+public class UserData
+{
+    [FirestoreProperty] public string UserName { get; set; }
+    [FirestoreProperty] public string EMail { get; set; }
+    [FirestoreProperty] public string PassWord { get; set; }
 }
