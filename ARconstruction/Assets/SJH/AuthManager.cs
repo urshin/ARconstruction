@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 
 public class AuthManager : MonoBehaviour
 {
@@ -42,39 +43,49 @@ public class AuthManager : MonoBehaviour
     {
         InitializeFirebase();
     }
+
+    private void OnApplicationQuit()
+    {
+        UserLogOut();
+    }
+
+    void UserLogOut()
+    {
+        FirebaseAuth.DefaultInstance.SignOut();
+    }
     void InitializeFirebase()
     {
         db = FirebaseFirestore.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
-        /*        auth.StateChanged += AuthStateChanged;
-                AuthStateChanged(this, null);*/
+        auth.StateChanged += AuthStateChanged;
+        AuthStateChanged(this, null);
     }
 
-    /* void AuthStateChanged(object sender, System.EventArgs eventArgs)
-     {
-         if (auth.CurrentUser != user)
-         {
-             bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null
-                 && auth.CurrentUser.IsValid();
-             if (!signedIn && user != null)
-             {
-                 Debug.Log("Signed out " + user.UserId);
-             }
-             user = auth.CurrentUser;
-             if (signedIn)
-             {
-                 Debug.Log("Signed in " + user.UserId);
-                 displayName = user.DisplayName ?? "";
-                 emailAddress = user.Email ?? "";
-             }
-         }
-     }*/
-
-    /*    void OnDestroy()
+    void AuthStateChanged(object sender, System.EventArgs eventArgs)
+    {
+        if (auth.CurrentUser != user)
         {
-            auth.StateChanged -= AuthStateChanged;
-            auth = null;
-        }*/
+            bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null
+                && auth.CurrentUser.IsValid();
+            if (!signedIn && user != null)
+            {
+                Debug.Log("Signed out " + user.UserId);
+            }
+            user = auth.CurrentUser;
+            if (signedIn)
+            {
+                Debug.Log("Signed in " + user.UserId);
+                displayName = user.DisplayName ?? "";
+                emailAddress = user.Email ?? "";
+            }
+        }
+    }
+
+    void OnDestroy()
+    {
+        auth.StateChanged -= AuthStateChanged;
+        auth = null;
+    }
 
     public void SignUpTry()
     {
