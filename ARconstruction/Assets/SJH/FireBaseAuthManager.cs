@@ -35,6 +35,7 @@ public class FireBaseAuthManager : MonoBehaviour
     FirebaseAuth auth;
     FirebaseUser user;
     FirebaseFunctions functions;
+
     bool isSignIn = false;
     bool isLogin = false;
 

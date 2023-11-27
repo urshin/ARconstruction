@@ -1,41 +1,21 @@
 {
   "project_info": {
-    "project_number": "954078940987",
-    "firebase_url": "https://arcontruction-c3e50-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "arcontruction-c3e50",
-    "storage_bucket": "arcontruction-c3e50.appspot.com"
+    "project_number": "407828496634",
+    "project_id": "arconstruction-15729",
+    "storage_bucket": "arconstruction-15729.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:954078940987:android:6c1a9055a91bd24682311e",
+        "mobilesdk_app_id": "1:407828496634:android:d3a444e3c9b9ebcde18943",
         "android_client_info": {
-          "package_name": "com.DefaultCompany.ARconstruction"
+          "package_name": "com.UnityBootCamp.ARconstruction"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBrLCerZuEqRgt30nOKgTsUV5rIASEDY-U"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:954078940987:android:a5853997a544340682311e",
-        "android_client_info": {
-          "package_name": "com.DefaultCompany.BIM_Test"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBrLCerZuEqRgt30nOKgTsUV5rIASEDY-U"
+          "current_key": "AIzaSyC8rslZKPsf_7_0RRlOmvVVTf1h2odQhzo"
         }
       ],
       "services": {
